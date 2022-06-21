@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Aplikasi;
 
 use App\Http\Controllers\Controller;
-use App\Models\Aplikasi;
+use App\Models\Aksi;
 use Illuminate\Http\Request;
 
-class AplikasiController extends Controller
+class AksiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,7 @@ class AplikasiController extends Controller
      */
     public function index()
     {
-        $aplikasi = Aplikasi::all();
-        return view('admin.aplikasi.index', compact('aplikasi'));
+        //
     }
 
     /**
@@ -37,28 +36,35 @@ class AplikasiController extends Controller
      */
     public function store(Request $request)
     {
-        Aplikasi::create($request->all());
-        return back()->with('ds','Aplikasi');
+        Aksi::create([
+            'fitur_id' => $request->fitur_id,
+            'nama_aksi' => $request->nama_aksi,
+            'status' => $request->status,
+            'akses' => json_encode($request->akses),
+            'detail' => $request->detail,
+        ]);
+
+        return back()->with('ds','Aksi');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Aplikasi  $aplikasi
+     * @param  \App\Models\Aksi  $aksi
      * @return \Illuminate\Http\Response
      */
-    public function show(Aplikasi $aplikasi)
+    public function show(Aksi $aksi)
     {
-        return view('admin.aplikasi.show', compact('aplikasi'));
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Aplikasi  $aplikasi
+     * @param  \App\Models\Aksi  $aksi
      * @return \Illuminate\Http\Response
      */
-    public function edit(Aplikasi $aplikasi)
+    public function edit(Aksi $aksi)
     {
         //
     }
@@ -67,33 +73,31 @@ class AplikasiController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Aplikasi  $aplikasi
+     * @param  \App\Models\Aksi  $aksi
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
     {
-        Aplikasi::where('id',$request->id)->update([
-            'nama_aplikasi' => $request->nama_aplikasi,
-            'nama_client' => $request->nama_client,
-            'tgl_awalproyek' => $request->tgl_awalproyek,
-            'tgl_akhirproyek' => $request->tgl_akhirproyek,
-            'keterangan' => $request->keterangan,
-            'level' => $request->level,
+        Aksi::where('id',$request->id)->update([
+            'nama_aksi' => $request->nama_aksi,
+            'status' => $request->status,
+            'akses' => json_encode($request->akses),
+            'detail' => $request->detail,
         ]);
 
-        return back()->with('du','Aplikasi');
+        return back()->with('du','Aksi');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Aplikasi  $aplikasi
+     * @param  \App\Models\Aksi  $aksi
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Aplikasi $aplikasi)
+    public function destroy(Aksi $aksi)
     {
-        $aplikasi->delete();
+        $aksi->delete();
 
-        return back()->with('dd','Aplikasi');
+        return back()->with('dd','Aksi');
     }
 }

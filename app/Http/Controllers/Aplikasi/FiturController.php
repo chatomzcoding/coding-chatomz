@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Aplikasi;
 
 use App\Http\Controllers\Controller;
-use App\Models\Aplikasi;
+use App\Models\Fitur;
 use Illuminate\Http\Request;
 
-class AplikasiController extends Controller
+class FiturController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,7 @@ class AplikasiController extends Controller
      */
     public function index()
     {
-        $aplikasi = Aplikasi::all();
-        return view('admin.aplikasi.index', compact('aplikasi'));
+        //
     }
 
     /**
@@ -37,28 +36,29 @@ class AplikasiController extends Controller
      */
     public function store(Request $request)
     {
-        Aplikasi::create($request->all());
-        return back()->with('ds','Aplikasi');
+        Fitur::create($request->all());
+
+        return back()->with('ds','Fitur');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Aplikasi  $aplikasi
+     * @param  \App\Models\Fitur  $fitur
      * @return \Illuminate\Http\Response
      */
-    public function show(Aplikasi $aplikasi)
+    public function show(Fitur $fitur)
     {
-        return view('admin.aplikasi.show', compact('aplikasi'));
+        return view('admin.fitur.show', compact('fitur'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Aplikasi  $aplikasi
+     * @param  \App\Models\Fitur  $fitur
      * @return \Illuminate\Http\Response
      */
-    public function edit(Aplikasi $aplikasi)
+    public function edit(Fitur $fitur)
     {
         //
     }
@@ -67,33 +67,30 @@ class AplikasiController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Aplikasi  $aplikasi
+     * @param  \App\Models\Fitur  $fitur
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
     {
-        Aplikasi::where('id',$request->id)->update([
-            'nama_aplikasi' => $request->nama_aplikasi,
-            'nama_client' => $request->nama_client,
-            'tgl_awalproyek' => $request->tgl_awalproyek,
-            'tgl_akhirproyek' => $request->tgl_akhirproyek,
-            'keterangan' => $request->keterangan,
-            'level' => $request->level,
+        Fitur::where('id',$request->id)->update([
+            'nama_fitur' => $request->nama_fitur,
+            'tabel' => $request->tabel,
+            'deskripsi' => $request->deskripsi,
         ]);
 
-        return back()->with('du','Aplikasi');
+        return back()->with('du','Fitur');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Aplikasi  $aplikasi
+     * @param  \App\Models\Fitur  $fitur
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Aplikasi $aplikasi)
+    public function destroy(Fitur $fitur)
     {
-        $aplikasi->delete();
+        $fitur->delete();
 
-        return back()->with('dd','Aplikasi');
+        return back()->with('dd','Fitur');
     }
 }

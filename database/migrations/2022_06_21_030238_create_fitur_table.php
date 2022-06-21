@@ -1,10 +1,11 @@
 <?php
 
+use App\Models\Aplikasi;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTableAplikasi extends Migration
+class CreateFiturTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +14,12 @@ class CreateTableAplikasi extends Migration
      */
     public function up()
     {
-        Schema::create('aplikasi', function (Blueprint $table) {
+        Schema::create('fitur', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_aplikasi');
-            $table->string('nama_client');
-            $table->date('tgl_awalproyek');
-            $table->date('tgl_akhirproyek');
-            $table->text('keterangan')->nullable();
-            $table->text('level')->nullable();
+            $table->foreignIdFor(Aplikasi::class);
+            $table->string('nama_fitur');
+            $table->string('tabel')->nullable();
+            $table->text('deskripsi')->nullable();
             $table->timestamps();
         });
     }
@@ -32,6 +31,6 @@ class CreateTableAplikasi extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('aplikasi');
+        Schema::dropIfExists('fitur');
     }
 }

@@ -21,10 +21,8 @@
     <link rel="stylesheet" href="{{ asset('template/mazer/vendors/fontawesome/all.min.css')}}">
     <link rel="stylesheet" href="{{ asset('template/mazer/css/app.css')}}">
 
-    {{-- @if ($alert)
         <script src="{{ asset('vendor/sweetalert/sweetalert.min.js')}}"></script>
         <script src="{{ asset('vendor/sweetalert/sweetalert2.css')}}"></script>
-    @endif --}}
 
     {{-- @if ($select)
         <link rel="stylesheet" href="{{ asset('template/admin/lte/plugins/select2/css/select2.min.css')}}">
@@ -181,7 +179,7 @@
         </script>
 
     {{-- js chatomz custom --}}
-    {{-- <script src="{{ asset('js/chatomz.js')}}"></script> --}}
+    <script src="{{ asset('js/chatomz.js')}}"></script>
 
     {{-- @if ($select)
         <script src="{{ asset('template/admin/lte/plugins/select2/js/select2.full.min.js')}}"></script>

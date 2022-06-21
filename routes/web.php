@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Aplikasi\AksiController;
 use App\Http\Controllers\Aplikasi\AplikasiController;
+use App\Http\Controllers\Aplikasi\FiturController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,4 +33,6 @@ Route::middleware([
     Route::get('admin',[HomeController::class,'index']);
 
     Route::resource('aplikasi',AplikasiController::class);
+    Route::resource('fitur',FiturController::class);
+    Route::resource('aksi',AksiController::class);
 });

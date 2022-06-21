@@ -5,16 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Aplikasi extends Model
+class Aksi extends Model
 {
     use HasFactory;
 
-    protected $table = 'aplikasi';
+    protected $table = 'aksi';
 
     protected $guarded = [];
-
-    public function fitur()
-    {
-        return $this->hasMany(Fitur::class);
-    }
 }

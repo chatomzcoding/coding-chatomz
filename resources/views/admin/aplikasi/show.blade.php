@@ -7,9 +7,52 @@
                 <div class="row">
                     <div class="card">
                     <div class="card-header">
+                        <a href="{{ url('aplikasi') }}" class="btn btn-outline-secondary btn-flat btn-sm"><i class="fas fa-angle-left"></i> Kembali</a>
                         <a href="#" class="btn btn-outline-primary btn-flat btn-sm" data-bs-toggle="modal" data-bs-target="#tambah"><i class="fas fa-plus"></i> Tambah Fitur</a>
                     </div>
                     <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <div class="card">
+                                    <div class="card-header bg-success text-white p-2">
+                                        <strong>SELESAI</strong>
+                                    </div>
+                                    <div class="card-body border display-4 p-2">
+                                        {{ $statistik['data']['selesai'] }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="card">
+                                    <div class="card-header bg-warning p-2">
+                                        <strong>PROSES</strong>
+                                    </div>
+                                    <div class="card-body border display-4 p-2">
+                                        {{ $statistik['data']['proses'] }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="card">
+                                    <div class="card-header bg-info p-2">
+                                        <strong>UBAH</strong>
+                                    </div>
+                                    <div class="card-body border display-4 p-2">
+                                        {{ $statistik['data']['ubah'] }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="card">
+                                    <div class="card-header bg-primary text-white p-2">
+                                        <strong>PROGRESS</strong>
+                                    </div>
+                                    <div class="card-body border display-4 p-2">
+                                        {{ $statistik['progress'] }}%
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="table-responsive">
                             <table id="example1" class="table table-borderless table-striped">
                                 <thead>
@@ -19,6 +62,8 @@
                                         <th>Nama Fitur</th>
                                         <th>Tabel</th>
                                         <th>Deskripsi</th>
+                                        <th>Total Aksi</th>
+                                        <th>Progress</th>
                                     </tr>
                                 </thead>
                                 <tbody class="text-capitalize">
@@ -35,6 +80,18 @@
                                             <td>{{ $item->nama_fitur}}</td>
                                             <td>{{ $item->tabel}}</td>
                                             <td>{{ $item->deskripsi}}</td>
+                                            <td>{{ count($item->aksi)}}</td>
+                                            <td>
+                                                @php
+                                                    $stat = statistikfitur($item->aksi);
+                                                    $prog = $stat['progress'];
+                                                @endphp
+                                                @if ($prog == 100)
+                                                    <span class="badge bg-success">100%</span>
+                                                @else
+                                                    <span class="badge bg-warning">{{ $prog }}%</span>
+                                                @endif
+                                            </td>
                                         </tr>
                                     @empty
                                         <tr class="text-center">

@@ -1,12 +1,13 @@
 <x-admin-layout title="Data Aplikasi">
     <x-slot name="content">
         <div class="page-heading">
-            <x-header head="Data Aplikasi {{ $fitur->aplikasi->nama_aplikasi }}" p="Fitur {{ $fitur->nama_aksi }}" active="Detail">
+            <x-header head="Data Aplikasi {{ $fitur->aplikasi->nama_aplikasi }}" p="Fitur {{ ucwords($fitur->nama_fitur) }}" active="Detail">
             </x-header>
             <section class="section">
                 <div class="row">
                     <div class="card">
                     <div class="card-header">
+                        <a href="{{ url('aplikasi/'.$fitur->aplikasi->id) }}" class="btn btn-outline-secondary btn-flat btn-sm"><i class="fas fa-angle-left"></i> Kembali</a>
                         <a href="#" class="btn btn-outline-primary btn-flat btn-sm" data-bs-toggle="modal" data-bs-target="#tambah"><i class="fas fa-plus"></i> Tambah Aksi</a>
                     </div>
                     <div class="card-body">
@@ -33,10 +34,10 @@
                                                     </button>
                                                 </x-aksi>
                                             </td>
-                                            <td>{{ $item->nama_aksi}}</td>
+                                            <td class="text-center">{!! uiAksi($item->nama_aksi)!!}</td>
                                             <td>{{ $item->akses}}</td>
                                             <td>{{ $item->detail}}</td>
-                                            <td>{{ $item->status}}</td>
+                                            <td class="text-center">{!! uiStatus($item->status)!!}</td>
                                         </tr>
                                     @empty
                                         <tr class="text-center">

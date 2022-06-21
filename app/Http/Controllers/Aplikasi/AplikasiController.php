@@ -49,7 +49,8 @@ class AplikasiController extends Controller
      */
     public function show(Aplikasi $aplikasi)
     {
-        return view('admin.aplikasi.show', compact('aplikasi'));
+        $statistik = statistikAplikasi($aplikasi->fitur);
+        return view('admin.aplikasi.show', compact('aplikasi','statistik'));
     }
 
     /**

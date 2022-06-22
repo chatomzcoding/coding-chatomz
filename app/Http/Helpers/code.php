@@ -31,7 +31,7 @@ function statistikprogress($aksi)
             $result[$key] = 0;
         }
     }
-    $progress = 0;
+    $progress = 100;
     if ($total > 0) {
         if ($result['selesai'] == 0) {
             $progress = 0;

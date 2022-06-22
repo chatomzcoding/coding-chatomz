@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Aplikasi;
 
 use App\Http\Controllers\Controller;
 use App\Models\Aplikasi;
+use App\Models\Fitur;
 use Illuminate\Http\Request;
 
 class AplikasiController extends Controller
@@ -50,7 +51,14 @@ class AplikasiController extends Controller
     public function show(Aplikasi $aplikasi)
     {
         $statistik = statistikAplikasi($aplikasi->fitur);
-        return view('admin.aplikasi.show', compact('aplikasi','statistik'));
+        $akses = (isset($_GET['akses'])) ? $_GET['akses'] : 'umum' ;
+        if ($akses == 'umum') {
+            $fitur = $aplikasi->fitur;
+        } else {
+            $fitur = $aplikasi->fitur->where('akses_fitur',$akses);
+        }
+        
+        return view('admin.aplikasi.show', compact('aplikasi','statistik','akses','fitur'));
     }
 
     /**

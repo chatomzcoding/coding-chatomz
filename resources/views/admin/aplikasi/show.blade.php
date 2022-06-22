@@ -24,7 +24,7 @@
                             </div>
                             <div class="col">
                                 <div class="card">
-                                    <div class="card-header bg-warning p-2">
+                                    <div class="card-header text-white bg-warning p-2">
                                         <strong>PROSES</strong>
                                     </div>
                                     <div class="card-body border display-4 p-2">
@@ -34,7 +34,7 @@
                             </div>
                             <div class="col">
                                 <div class="card">
-                                    <div class="card-header bg-info p-2">
+                                    <div class="card-header text-white bg-info p-2">
                                         <strong>UBAH</strong>
                                     </div>
                                     <div class="card-body border display-4 p-2">
@@ -53,6 +53,22 @@
                                 </div>
                             </div>
                         </div>
+                        <form action="" method="get">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <select name="akses" id="" class="form-control" onchange="this.form.submit()">
+                                            <option value="umum">UMUM</option>
+                                            @foreach (listakseslevel($aplikasi->level) as $item)
+                                                <option value="{{ $item }}" @if ($akses == $item)
+                                                selected
+                                            @endif>{{ strtoupper($item) }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>   
+                                </div>
+                            </div>
+                        </form>
                         <div class="table-responsive">
                             <table id="example1" class="table table-borderless table-striped">
                                 <thead>
@@ -61,24 +77,26 @@
                                         <th width="10%">Aksi</th>
                                         <th>Nama Fitur</th>
                                         <th>Tabel</th>
+                                        <th>Akses</th>
                                         <th>Deskripsi</th>
                                         <th>Total Aksi</th>
                                         <th>Progress</th>
                                     </tr>
                                 </thead>
                                 <tbody class="text-capitalize">
-                                    @forelse ($aplikasi->fitur as $item)
+                                    @forelse ($fitur as $item)
                                     <tr>
                                             <td class="text-center">{{ $loop->iteration}}</td>
                                             <td class="text-center">
                                                 <x-aksi :id="$item->id" link="fitur" detail="TRUE">
-                                                    <button type="button" data-bs-toggle="modal"  data-nama_fitur="{{ $item->nama_fitur }}"  data-tabel="{{ $item->tabel }}" data-deskripsi="{{ $item->deskripsi }}" data-id="{{ $item->id }}" data-bs-target="#ubah" title="" class="dropdown-item text-success" data-original-title="Edit Task">
+                                                    <button type="button" data-bs-toggle="modal"  data-nama_fitur="{{ $item->nama_fitur }}"  data-tabel="{{ $item->tabel }}" data-deskripsi="{{ $item->deskripsi }}" data-akses_fitur="{{ $item->akses_fitur }}" data-id="{{ $item->id }}" data-bs-target="#ubah" title="" class="dropdown-item text-success" data-original-title="Edit Task">
                                                         <i class="fa fa-edit" style="width: 20px;"></i> EDIT
                                                     </button>
                                                 </x-aksi>
                                             </td>
                                             <td>{{ $item->nama_fitur}}</td>
                                             <td>{{ $item->tabel}}</td>
+                                            <td class="text-uppercase">{{ $item->akses_fitur}}</td>
                                             <td>{{ $item->deskripsi}}</td>
                                             <td>{{ count($item->aksi)}}</td>
                                             <td>
@@ -95,7 +113,7 @@
                                         </tr>
                                     @empty
                                         <tr class="text-center">
-                                            <td colspan="7">tidak ada data</td>
+                                            <td colspan="8">tidak ada data</td>
                                         </tr>
                                     @endforelse
                             </table>
@@ -118,6 +136,15 @@
                         <input type="text" name="tabel" id="tabel" class="form-control">
                 </div>
                 <div class="form-group">
+                    <label for="">Akses Fitur</label>
+                    <select name="akses_fitur" id="" class="form-control">
+                        <option value="umum">UMUM</option>
+                        @foreach (listakseslevel($aplikasi->level) as $item)
+                            <option value="{{ $item }}">{{ strtoupper($item) }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group">
                     <label for="">Deskripsi</label>
                     <textarea name="deskripsi" id="deskripsi" cols="30" rows="3" class="form-control"></textarea>
                 </div>
@@ -134,6 +161,15 @@
                         <input type="text" name="tabel" id="tabel" class="form-control">
                 </div>
                 <div class="form-group">
+                    <label for="">Akses Fitur</label>
+                    <select name="akses_fitur" id="akses_fitur" class="form-control">
+                        <option value="umum">UMUM</option>
+                        @foreach (listakseslevel($aplikasi->level) as $item)
+                            <option value="{{ $item }}">{{ strtoupper($item) }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group">
                     <label for="">Deskripsi</label>
                     <textarea name="deskripsi" id="deskripsi" cols="30" rows="3" class="form-control"></textarea>
                 </div>
@@ -146,11 +182,13 @@
                 var button = $(event.relatedTarget)
                 var nama_fitur = button.data('nama_fitur')
                 var tabel = button.data('tabel')
+                var akses_fitur = button.data('akses_fitur')
                 var deskripsi = button.data('deskripsi')
                 var id = button.data('id')
                 var modal = $(this)
                 modal.find('.modal-body #nama_fitur').val(nama_fitur);
                 modal.find('.modal-body #tabel').val(tabel);
+                modal.find('.modal-body #akses_fitur').val(akses_fitur);
                 modal.find('.modal-body #deskripsi').val(deskripsi);
                 modal.find('.modal-body #id').val(id);
             })

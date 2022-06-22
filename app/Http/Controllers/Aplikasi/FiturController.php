@@ -75,6 +75,7 @@ class FiturController extends Controller
         Fitur::where('id',$request->id)->update([
             'nama_fitur' => $request->nama_fitur,
             'tabel' => $request->tabel,
+            'akses_fitur' => $request->akses_fitur,
             'deskripsi' => $request->deskripsi,
         ]);
 

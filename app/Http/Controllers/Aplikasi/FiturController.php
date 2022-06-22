@@ -50,7 +50,14 @@ class FiturController extends Controller
     public function show(Fitur $fitur)
     {
         $statistik = statistikFitur($fitur->aksi);
-        return view('admin.fitur.show', compact('fitur','statistik'));
+        $label = (isset($_GET['label'])) ? $_GET['label'] : 'semua' ;
+        if ($label == 'semua') {
+            $aksi = $fitur->aksi;
+        } else {
+            $aksi = $fitur->aksi->where('label',$label);
+        }
+        
+        return view('admin.fitur.show', compact('fitur','statistik','label','aksi'));
     }
 
     /**

@@ -54,6 +54,22 @@
                                 </div>
                             </div>
                         </div>
+                        <form action="" method="get">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <select name="label" id="" class="form-control" onchange="this.form.submit()">
+                                            <option value="semua">SEMUA</option>
+                                            @foreach (listtabel($fitur->tabel) as $item)
+                                                <option value="{{ $item }}" @if ($label == $item)
+                                                selected
+                                            @endif>{{ strtoupper($item) }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>   
+                                </div>
+                            </div>
+                        </form>
                         <div class="table-responsive">
                             <table id="example1" class="table table-borderless table-striped">
                                 <thead>
@@ -68,7 +84,7 @@
                                     </tr>
                                 </thead>
                                 <tbody class="text-capitalize">
-                                    @forelse ($fitur->aksi as $item)
+                                    @forelse ($aksi as $item)
                                     <tr>
                                             <td class="text-center">{{ $loop->iteration}}</td>
                                             <td class="text-center">

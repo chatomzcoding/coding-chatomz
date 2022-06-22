@@ -58,7 +58,7 @@ function uiAksi($value)
         
         default:
             $warna = 'secondary';
-            $warna = 'file';
+            $icon = 'file';
             break;
     }
     $ui     = "<span class='badge bg-".$warna."'><i class='bi-".$icon."'></i>".$value."</span>";

@@ -61,9 +61,9 @@
                                         <th width="5%">No</th>
                                         <th width="10%">Aksi</th>
                                         <th>Nama Aksi</th>
+                                        <th>Label</th>
                                         <th>Detail</th>
                                         <th>Akses</th>
-                                        <th>Label</th>
                                         <th>status</th>
                                     </tr>
                                 </thead>
@@ -72,16 +72,16 @@
                                     <tr>
                                             <td class="text-center">{{ $loop->iteration}}</td>
                                             <td class="text-center">
-                                                <x-aksi :id="$item->id" link="aksi" detail="TRUE">
+                                                <x-aksi :id="$item->id" link="aksi">
                                                     <button type="button" data-bs-toggle="modal"  data-nama_aksi="{{ $item->nama_aksi }}"  data-akses="{{ $item->akses }}" data-status="{{ $item->status }}" data-detail="{{ $item->detail }}" data-label="{{ $item->label }}" data-id="{{ $item->id }}" data-bs-target="#ubah" title="" class="dropdown-item text-success" data-original-title="Edit Task">
                                                         <i class="fa fa-edit" style="width: 20px;"></i> EDIT
                                                     </button>
                                                 </x-aksi>
                                             </td>
                                             <td class="text-center">{!! uiAksi($item->nama_aksi)!!}</td>
+                                            <td class="text-uppercase">{{ $item->label}}</td>
                                             <td>{{ $item->detail}}</td>
                                             <td>{{ $item->akses}}</td>
-                                            <td class="text-uppercase">{{ $item->label}}</td>
                                             <td class="text-center">{!! uiStatus($item->status)!!}</td>
                                         </tr>
                                     @empty

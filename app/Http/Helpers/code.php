@@ -36,7 +36,7 @@ function statistikAplikasi($data)
         }
     }
     $progress = 100;
-    if (count($data) > 0) {
+    if ($result['selesai'] <> 0) {
         $progress = ($result['selesai']/($result['proses'] + $result['ubah'] + $result['selesai'])) * 100;
     }
     $statistik = [
@@ -61,7 +61,7 @@ function statistikFitur($data)
         }
     }
     $progress = 100;
-    if (count($data) > 0) {
+    if ($result['selesai'] <> 0) {
         $progress = ($result['selesai']/($result['proses'] + $result['ubah'] + $result['selesai'])) * 100;
     }
     $statistik = [

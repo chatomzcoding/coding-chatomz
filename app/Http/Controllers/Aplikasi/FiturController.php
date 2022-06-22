@@ -37,8 +37,8 @@ class FiturController extends Controller
     public function store(Request $request)
     {
         Fitur::create($request->all());
-
-        return back()->with('ds','Fitur');
+        $fitur = Fitur::latest()->first();
+        return redirect('fitur/'.$fitur->id)->with('ds','Fitur');
     }
 
     /**

@@ -19,7 +19,7 @@ function liststatusaksi()
 }
 function listnamaaksi()
 {
-    $status = ['tambah','ubah','lihat','hapus','cetak','import','filter','statistik','lainnya'];
+    $status = ['tambah','ubah','lihat','hapus','detail','cetak','import','filter','statistik','lainnya'];
     return $status;
 }
 

@@ -39,6 +39,10 @@ function uiAksi($value)
             $warna = 'info';
             $icon = 'eye';
             break;
+        case 'detail':
+            $warna = 'info';
+            $icon = 'book';
+            break;
         case 'hapus':
             $warna = 'danger';
             $icon = 'trash';

@@ -52,13 +52,31 @@ class AplikasiController extends Controller
     {
         $statistik = statistikAplikasi($aplikasi->fitur);
         $akses = (isset($_GET['akses'])) ? $_GET['akses'] : 'umum' ;
+        $status = (isset($_GET['status'])) ? $_GET['status'] : 'semua' ;
         if ($akses == 'umum') {
             $fitur = $aplikasi->fitur;
         } else {
             $fitur = $aplikasi->fitur->where('akses_fitur',$akses);
         }
+
+        if ($status <> 'semua') {
+            $result = [];
+            foreach ($fitur as $key) {
+                $stat = statistikfitur($key->aksi);
+                if ($status == 'proses') {
+                    if ($stat['progress'] <> 100) {
+                        $result[] = $key;
+                    }
+                } else {
+                    if ($stat['progress'] == 100) {
+                        $result[] = $key;
+                    }
+                }
+            }
+            $fitur = $result;
+        }
         
-        return view('admin.aplikasi.show', compact('aplikasi','statistik','akses','fitur'));
+        return view('admin.aplikasi.show', compact('aplikasi','statistik','akses','fitur','status'));
     }
 
     /**

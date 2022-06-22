@@ -19,7 +19,7 @@
                                     <div class="card-header bg-success text-white p-2">
                                         <strong>SELESAI</strong>
                                     </div>
-                                    <div class="card-body border display-4 p-2">
+                                    <div class="card-body border display-4 p-2 rounded-bottom">
                                         {{ $statistik['data']['selesai'] }}
                                     </div>
                                 </div>
@@ -29,7 +29,7 @@
                                     <div class="card-header text-white bg-warning p-2">
                                         <strong>PROSES</strong>
                                     </div>
-                                    <div class="card-body border display-4 p-2">
+                                    <div class="card-body border display-4 p-2 rounded-bottom">
                                         {{ $statistik['data']['proses'] }}
                                     </div>
                                 </div>
@@ -39,7 +39,7 @@
                                     <div class="card-header text-white bg-info p-2">
                                         <strong>UBAH</strong>
                                     </div>
-                                    <div class="card-body border display-4 p-2">
+                                    <div class="card-body border display-4 p-2 rounded-bottom">
                                         {{ $statistik['data']['ubah'] }}
                                     </div>
                                 </div>
@@ -49,7 +49,7 @@
                                     <div class="card-header bg-primary text-white p-2">
                                         <strong>PROGRESS</strong>
                                     </div>
-                                    <div class="card-body border display-4 p-2">
+                                    <div class="card-body border display-4 p-2 rounded-bottom">
                                         {{ $statistik['progress'] }}%
                                     </div>
                                 </div>
@@ -66,6 +66,21 @@
                                                 selected
                                             @endif>{{ strtoupper($item) }}</option>
                                             @endforeach
+                                        </select>
+                                    </div>   
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <select name="status" id="" class="form-control" onchange="this.form.submit()">
+                                            <option value="semua" @if ($status == 'semua')
+                                            selected
+                                            @endif>SEMUA</option>
+                                            <option value="proses" @if ($status == 'proses')
+                                            selected
+                                            @endif>PROSES</option>
+                                            <option value="selesai" @if ($status == 'selesai')
+                                            selected
+                                            @endif>SELESAI</option>
                                         </select>
                                     </div>   
                                 </div>

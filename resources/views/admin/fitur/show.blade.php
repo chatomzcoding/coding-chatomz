@@ -131,7 +131,9 @@
                     @else
                     <select name="label" id="label" class="form-control">
                         @foreach (listtabel($fitur->tabel) as $item)
-                            <option value="{{ $item }}">{{ strtoupper($item) }}</option>
+                            <option value="{{ $item }}" @if ($label == $item)
+                                selected
+                            @endif>{{ strtoupper($item) }}</option>
                         @endforeach
                     </select>
                     @endif

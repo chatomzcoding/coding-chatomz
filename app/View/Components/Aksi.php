@@ -15,7 +15,7 @@ class Aksi extends Component
     public $link;
     public $detail;
 
-    public function __construct($id,$link,$detail)
+    public function __construct($id,$link,$detail=null)
     {
         $this->id = $id;
         $this->link = $link;

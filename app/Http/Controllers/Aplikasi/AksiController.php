@@ -41,6 +41,7 @@ class AksiController extends Controller
             'nama_aksi' => $request->nama_aksi,
             'status' => $request->status,
             'akses' => json_encode($request->akses),
+            'label' => $request->label,
             'detail' => $request->detail,
         ]);
 
@@ -83,6 +84,7 @@ class AksiController extends Controller
             'status' => $request->status,
             'akses' => json_encode($request->akses),
             'detail' => $request->detail,
+            'label' => $request->label,
         ]);
 
         return back()->with('du','Aksi');

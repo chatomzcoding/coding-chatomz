@@ -20,7 +20,7 @@ function uiStatus($value)
             return NULL;
             break;
     }
-    $ui     = "<span class='badge bg-".$warna."'>".$value."</span>";
+    $ui     = "<span class='badge bg-".$warna." w-100'>".$value."</span>";
     return $ui;
 }
 
@@ -61,6 +61,6 @@ function uiAksi($value)
             $icon = 'file';
             break;
     }
-    $ui     = "<span class='badge bg-".$warna."'><i class='bi-".$icon."'></i>".$value."</span>";
+    $ui     = "<span class='badge bg-".$warna." w-100'><i class='bi-".$icon."'></i>".$value."</span>";
     return $ui;
 }

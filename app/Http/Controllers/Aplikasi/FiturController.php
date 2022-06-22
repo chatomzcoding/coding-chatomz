@@ -49,7 +49,8 @@ class FiturController extends Controller
      */
     public function show(Fitur $fitur)
     {
-        return view('admin.fitur.show', compact('fitur'));
+        $statistik = statistikFitur($fitur->aksi);
+        return view('admin.fitur.show', compact('fitur','statistik'));
     }
 
     /**

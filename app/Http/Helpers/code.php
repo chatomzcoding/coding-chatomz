@@ -6,6 +6,12 @@ function listakseslevel($level)
     $dlevel = array_map('trim',$dlevel);
     return $dlevel;
 }
+function listtabel($tabel)
+{
+    $result = explode('|',$tabel);
+    $result = array_map('trim',$result);
+    return $result;
+}
 function liststatusaksi()
 {
     $status = ['proses','selesai','ubah','sembunyikan'];
@@ -13,7 +19,7 @@ function liststatusaksi()
 }
 function listnamaaksi()
 {
-    $status = ['tambah','ubah','lihat','hapus','cetak','filter','statistik','lainnya'];
+    $status = ['tambah','ubah','lihat','hapus','cetak','import','filter','statistik','lainnya'];
     return $status;
 }
 

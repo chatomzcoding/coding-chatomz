@@ -1,7 +1,8 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/u1496746/public_html/coding
+    # - export DEPLOYPATH=/home/u1496746/public_html/coding
+    - export DEPLOYPATH=/home/u1662612/public_html/coding
     - /bin/cp -R routes $DEPLOYPATH
     - /bin/cp -R resources $DEPLOYPATH
     - /bin/cp -R app $DEPLOYPATH

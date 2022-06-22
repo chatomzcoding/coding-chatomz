@@ -17,6 +17,32 @@ function listnamaaksi()
     return $status;
 }
 
+function statistikprogress($aksi)
+{
+    $result = [];
+    $status = liststatusaksi();
+    foreach ($status as $key) {
+        if (isset($aksi[$key])) {
+            $result[$key] = count($aksi[$key]);
+        } else {
+            $result[$key] = 0;
+        }
+    }
+    $progress = 100;
+    if (count($aksi) > 0) {
+        if ($result['selesai'] == 0) {
+            $progress = 0;
+        } else {
+            $progress = ($result['selesai']/count($aksi)) * 100;
+        }
+    }
+    $statistik = [
+        'data' => $result,
+        'progress' => round($progress,2)
+    ];
+    return $statistik;
+}
+
 // statistik 
 function statistikAplikasi($data)
 {
@@ -26,23 +52,7 @@ function statistikAplikasi($data)
             $aksi[$k->status][] = 1;
         }
     }
-    $result = [];
-    $status = liststatusaksi();
-    foreach ($status as $key) {
-        if (isset($aksi[$key])) {
-            $result[$key] = count($aksi[$key]);
-        } else {
-            $result[$key] = 0;
-        }
-    }
-    $progress = 100;
-    if ($result['selesai'] <> 0) {
-        $progress = ($result['selesai']/($result['proses'] + $result['ubah'] + $result['selesai'])) * 100;
-    }
-    $statistik = [
-        'data' => $result,
-        'progress' => round($progress,2)
-    ];
+    $statistik = statistikprogress($aksi);
     return $statistik;
 }
 function statistikFitur($data)
@@ -51,22 +61,6 @@ function statistikFitur($data)
     foreach ($data as $k) {
         $aksi[$k->status][] = 1;
     }
-    $result = [];
-    $status = liststatusaksi();
-    foreach ($status as $key) {
-        if (isset($aksi[$key])) {
-            $result[$key] = count($aksi[$key]);
-        } else {
-            $result[$key] = 0;
-        }
-    }
-    $progress = 100;
-    if ($result['selesai'] <> 0) {
-        $progress = ($result['selesai']/($result['proses'] + $result['ubah'] + $result['selesai'])) * 100;
-    }
-    $statistik = [
-        'data' => $result,
-        'progress' => round($progress,2)
-    ];
+    $statistik = statistikprogress($aksi);
     return $statistik;
 }

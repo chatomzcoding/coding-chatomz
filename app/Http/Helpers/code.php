@@ -21,19 +21,22 @@ function statistikprogress($aksi)
 {
     $result = [];
     $status = liststatusaksi();
+    $total  = 0;
     foreach ($status as $key) {
         if (isset($aksi[$key])) {
-            $result[$key] = count($aksi[$key]);
+            $subtotal     = count($aksi[$key]);  
+            $total        = $total + $subtotal;
+            $result[$key] = $subtotal;
         } else {
             $result[$key] = 0;
         }
     }
-    $progress = 100;
-    if (count($aksi) > 0) {
+    $progress = 0;
+    if ($total > 0) {
         if ($result['selesai'] == 0) {
             $progress = 0;
         } else {
-            $progress = ($result['selesai']/count($aksi)) * 100;
+            $progress = ($result['selesai']/$total) * 100;
         }
     }
     $statistik = [

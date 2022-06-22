@@ -1,14 +1,14 @@
 <x-admin-layout title="Data Aplikasi">
     <x-slot name="content">
         <div class="page-heading">
-            <x-header head="Data Aplikasi {{ $fitur->aplikasi->nama_aplikasi }}" p="Fitur {{ ucwords($fitur->nama_fitur) }}" active="Detail">
+            <x-header head="Data Aplikasi {{ $fitur->aplikasi->nama_aplikasi }}" p="Fitur {{ ucwords($fitur->nama_fitur) }}" :hyperlink="['Daftar' => 'aplikasi',$fitur->aplikasi->nama_aplikasi => 'aplikasi/'.$fitur->aplikasi->id]" active="Detail">
             </x-header>
             <section class="section">
                 <div class="row">
                     <div class="card">
                     <div class="card-header">
-                        <a href="{{ url('aplikasi/'.$fitur->aplikasi->id) }}" class="btn btn-outline-secondary btn-flat btn-sm"><i class="fas fa-angle-left"></i> Kembali</a>
-                        <a href="#" class="btn btn-outline-primary btn-flat btn-sm" data-bs-toggle="modal" data-bs-target="#tambah"><i class="fas fa-plus"></i> Tambah Aksi</a>
+                        <a href="{{ url('aplikasi/'.$fitur->aplikasi->id) }}" class="btn btn-outline-secondary btn-flat btn-sm"><i class="fas fa-angle-left"></i></a>
+                        <a href="#" class="btn btn-outline-primary btn-flat btn-sm" data-bs-toggle="modal" data-bs-target="#tambah"><i class="fas fa-plus"></i> Aksi</a>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">

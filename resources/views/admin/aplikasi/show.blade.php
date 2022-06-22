@@ -1,14 +1,16 @@
 <x-admin-layout title="Data Aplikasi">
     <x-slot name="content">
         <div class="page-heading">
-            <x-header head="Data Aplikasi {{ $aplikasi->nama_aplikasi }}" active="Detail">
+            <x-header head="Data Aplikasi {{ $aplikasi->nama_aplikasi }}" :hyperlink="['Daftar Aplikasi' => 'aplikasi']" active="Detail">
             </x-header>
             <section class="section">
                 <div class="row">
                     <div class="card">
                     <div class="card-header">
-                        <a href="{{ url('aplikasi') }}" class="btn btn-outline-secondary btn-flat btn-sm"><i class="fas fa-angle-left"></i> Kembali</a>
-                        <a href="#" class="btn btn-outline-primary btn-flat btn-sm" data-bs-toggle="modal" data-bs-target="#tambah"><i class="fas fa-plus"></i> Tambah Fitur</a>
+                        <a href="{{ url('aplikasi') }}" class="btn btn-outline-secondary btn-flat btn-sm"><i class="fas fa-angle-left"></i></a>
+                        <a href="#" class="btn btn-outline-success btn-flat btn-sm" data-bs-toggle="modal" data-bs-target="#editaplikasi"><i class="fas fa-pen"></i> Aplikasi</a>
+                        <a href="#" class="btn btn-outline-primary btn-flat btn-sm" data-bs-toggle="modal" data-bs-target="#tambah"><i class="fas fa-plus"></i> Fitur</a>
+                        <span class="float-end fst-italic">batas pengerjaan {{ Universal::hitung_hari($aplikasi->tgl_akhirproyek) }} hari lagi</span>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -105,9 +107,9 @@
                                                     $prog = $stat['progress'];
                                                 @endphp
                                                 @if ($prog == 100)
-                                                    <span class="badge bg-success">100%</span>
+                                                    <span class="badge bg-success w-100">100%</span>
                                                 @else
-                                                    <span class="badge bg-warning">{{ $prog }}%</span>
+                                                    <span class="badge bg-warning w-100">{{ $prog }}%</span>
                                                 @endif
                                             </td>
                                         </tr>
@@ -140,7 +142,9 @@
                     <select name="akses_fitur" id="" class="form-control">
                         <option value="umum">UMUM</option>
                         @foreach (listakseslevel($aplikasi->level) as $item)
-                            <option value="{{ $item }}">{{ strtoupper($item) }}</option>
+                            <option value="{{ $item }}" @if ($akses == $item)
+                            selected
+                        @endif>{{ strtoupper($item) }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -172,6 +176,35 @@
                 <div class="form-group">
                     <label for="">Deskripsi</label>
                     <textarea name="deskripsi" id="deskripsi" cols="30" rows="3" class="form-control"></textarea>
+                </div>
+            </section>
+        </x-modalubah>
+        <x-modalubah judul="ubah data Aplikasi" link="aplikasi" id="editaplikasi">
+            <input type="hidden" name="id" value="{{ $aplikasi->id }}">
+            <section class="p-3">
+                <div class="form-group">
+                    <label for="">Nama Aplikasi</label>
+                    <input type="text" name="nama_aplikasi" value="{{ $aplikasi->nama_aplikasi }}" class="form-control" required>
+                </div>
+                <div class="form-group">
+                        <label for="">Nama Client</label>
+                        <input type="text" name="nama_client" value="{{ $aplikasi->nama_client }}" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="">Tanggal awal proyek</label>
+                    <input type="date" name="tgl_awalproyek" value="{{ $aplikasi->tgl_awalproyek }}" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="">Tanggal akhir proyek</label>
+                    <input type="date" name="tgl_akhirproyek" value="{{ $aplikasi->tgl_akhirproyek }}" id="tgl_akhirproyek" class="form-control" required>
+                </div>
+                <div class="form-group">
+                        <label for="">Level</label>
+                        <input type="text" name="level" value="{{ $aplikasi->level }}" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="">Keterangan</label>
+                    <textarea name="keterangan" id="keterangan" cols="30" rows="3" class="form-control">{{ $aplikasi->keterangan }}</textarea>
                 </div>
             </section>
         </x-modalubah>

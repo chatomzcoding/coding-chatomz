@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Aplikasi;
 
 use App\Http\Controllers\Controller;
 use App\Models\Aksi;
+use App\Models\Fitur;
 use Illuminate\Http\Request;
 
 class AksiController extends Controller
@@ -36,14 +37,33 @@ class AksiController extends Controller
      */
     public function store(Request $request)
     {
-        Aksi::create([
-            'fitur_id' => $request->fitur_id,
-            'nama_aksi' => $request->nama_aksi,
-            'status' => $request->status,
-            'akses' => json_encode($request->akses),
-            'label' => $request->label,
-            'detail' => $request->detail,
-        ]);
+        $s = (isset($request->s)) ? $request->s : 'store' ;
+        switch ($s) {
+            case 'crud':
+                $crud   = ['tambah','lihat','ubah','hapus'];
+                for ($i=0; $i < count($crud) ; $i++) { 
+                    Aksi::create([
+                        'fitur_id' => $request->fitur_id,
+                        'nama_aksi' => $crud[$i],
+                        'status' => $request->status,
+                        'akses' => json_encode($request->akses),
+                        'label' => $request->label,
+                        'detail' => $request->detail,
+                    ]);
+                }
+                break;
+            
+            default:
+                Aksi::create([
+                    'fitur_id' => $request->fitur_id,
+                    'nama_aksi' => $request->nama_aksi,
+                    'status' => $request->status,
+                    'akses' => json_encode($request->akses),
+                    'label' => $request->label,
+                    'detail' => $request->detail,
+                ]);
+                break;
+        }
 
         return back()->with('ds','Aksi');
     }
@@ -79,13 +99,27 @@ class AksiController extends Controller
      */
     public function update(Request $request)
     {
-        Aksi::where('id',$request->id)->update([
-            'nama_aksi' => $request->nama_aksi,
-            'status' => $request->status,
-            'akses' => json_encode($request->akses),
-            'detail' => $request->detail,
-            'label' => $request->label,
-        ]);
+        $s = (isset($request->s)) ? $request->s : 'update' ;
+        switch ($s) {
+            case 'selesai':
+                $aksi   = Fitur::find($request->fitur_id)->aksi;
+                foreach ($aksi as $key) {
+                    Aksi::where('id',$key->id)->update([
+                        'status' => 'selesai'
+                    ]);
+                }
+                break;
+            
+            default:
+                Aksi::where('id',$request->id)->update([
+                    'nama_aksi' => $request->nama_aksi,
+                    'status' => $request->status,
+                    'akses' => json_encode($request->akses),
+                    'detail' => $request->detail,
+                    'label' => $request->label,
+                ]);
+                break;
+        }
 
         return back()->with('du','Aksi');
     }

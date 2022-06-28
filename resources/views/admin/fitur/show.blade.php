@@ -10,6 +10,8 @@
                         <a href="{{ url('aplikasi/'.$fitur->aplikasi->id) }}" class="btn btn-outline-secondary btn-flat btn-sm"><i class="fas fa-angle-left"></i></a>
                         <a href="#" class="btn btn-outline-success btn-flat btn-sm" data-bs-toggle="modal" data-bs-target="#editfitur"><i class="fas fa-pen"></i> Fitur</a>
                         <a href="#" class="btn btn-outline-primary btn-flat btn-sm" data-bs-toggle="modal" data-bs-target="#tambah"><i class="fas fa-plus"></i> Aksi</a>
+                        <a href="#" class="btn btn-outline-primary btn-flat btn-sm" data-bs-toggle="modal" data-bs-target="#tambahcrud"><i class="fas fa-plus"></i> CRUD</a>
+                        <a href="#" class="btn btn-outline-success btn-flat btn-sm" data-bs-toggle="modal" data-bs-target="#selesai"><i class="bi bi-card-checklist"></i> Selesai</a>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -164,6 +166,53 @@
                 </div>
             </section>
         </x-modalsimpan>
+        <x-modalsimpan judul="Tambah Aksi" link="aksi" id=tambahcrud>
+            <div class="alert alert-info">
+                Tambahkan aksi Create (tambah), Read (lihat), Update (ubah), Delete (hapus)
+            </div>
+            <section class="p-3">
+                <input type="hidden" name="fitur_id" value="{{ $fitur->id }}">
+                <input type="hidden" name="s" value="crud">
+                <div class="form-group">
+                    <label for="">Label</label>
+                    @if (is_null($fitur->tabel))
+                        <input type="text" name="label" class="form-control">        
+                    @else
+                    <select name="label" id="label" class="form-control">
+                        @foreach (listtabel($fitur->tabel) as $item)
+                            <option value="{{ $item }}" @if ($label == $item)
+                                selected
+                            @endif>{{ strtoupper($item) }}</option>
+                        @endforeach
+                    </select>
+                    @endif
+                </div>
+                @if ($fitur->akses_fitur == 'umum')
+                    <div class="form-group">
+                        <label for="">Akses</label>
+                        <div>
+                            @foreach (listakseslevel($fitur->aplikasi->level) as $item)
+                                <input type="checkbox" name="akses[]" value="{{ $item }}"> {{ $item }} <br>
+                            @endforeach
+                        </div>
+                    </div>
+                @else
+                    <input type="hidden" name="akses[]" value="{{ $fitur->akses_fitur }}">        
+                @endif
+                <div class="form-group">
+                    <label for="">Status</label>
+                    <select name="status" id="status" class="form-control">
+                        @foreach (liststatusaksi() as $item)
+                            <option value="{{ $item }}">{{ strtoupper($item) }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="">Detail</label>
+                    <textarea name="detail" id="detail" cols="30" rows="3" class="form-control"></textarea>
+                </div>
+            </section>
+        </x-modalsimpan>
         <x-modalubah judul="ubah data Fitur" link="fitur" id="editfitur">
             <input type="hidden" name="id" value="{{ $fitur->id }}">
             <section class="p-3">
@@ -238,6 +287,15 @@
                 <div class="form-group">
                     <label for="">Detail</label>
                     <textarea name="detail" id="detail" cols="30" rows="3" class="form-control"></textarea>
+                </div>
+            </section>
+        </x-modalubah>
+        <x-modalubah judul="ubah data Aksi" link="aksi" id="selesai">
+            <section class="p-3">
+                <input type="hidden" name="fitur_id" value="{{ $fitur->id }}">
+                <input type="hidden" name="s" value="selesai">
+                <div class="alert alert-info">
+                    dengan klik SIMPAN maka semua aksi pada fitur {{ $fitur->nama_fitur }} akan berstatus selesai
                 </div>
             </section>
         </x-modalubah>

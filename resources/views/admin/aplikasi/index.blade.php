@@ -37,8 +37,8 @@
                                             </td>
                                             <td>{{ $item->nama_aplikasi}}</td>
                                             <td>{{ $item->nama_client}}</td>
-                                            <td>{{ $item->tgl_awalproyek}}</td>
-                                            <td>{{ $item->tgl_akhirproyek}}</td>
+                                            <td>{{ Universal::tgl_indo($item->tgl_awalproyek)}}</td>
+                                            <td>{{ Universal::tgl_indo($item->tgl_akhirproyek)}}</td>
                                             <td>{{ $item->level}}</td>
                                             <td>{{ $item->keterangan}}</td>
                                         </tr>
